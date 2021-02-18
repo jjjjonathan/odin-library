@@ -1,23 +1,26 @@
-let library = [];
+class Library {
+  #manifest = [];
 
-function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+  add(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read);
+    this.#manifest.push(newBook);
+    this.render();
+  }
 
-  this.info = function() {
-    const readText = read ? "read" : "not read yet"
-    const infoText = `${title} by ${author}, ${pages} pages, ${readText}`
-    return infoText;
+  render() {
+
   }
 }
 
-function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
-  library.push(newBook);
-  displayLibrary();
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  };
 }
+
 
 function displayLibrary() {
   const container = document.querySelector('#container');
@@ -147,7 +150,7 @@ function handleFormSubmit(event) {
 
     if (read !== true) read === false;
 
-    addBookToLibrary(title, author, pages, read);
+    Library.add(title, author, pages, read);
 
     function clearInput(id) {
       const input = document.getElementById(id);
